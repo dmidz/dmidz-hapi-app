@@ -1,0 +1,35 @@
+{
+  "name": "dmidz-hapi-app",
+  "version": "1.0.0",
+  "description": "Compose an Hapi application with a config, including server settings, global routes and plugins.",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab test/unit.js -v -I check",
+    "test_noleaks": "lab test/unit.js --leaks -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmidz/dmidz-hapi-app.git"
+  },
+  "keywords": [
+    "Hapi"
+  ],
+  "author": "David MARTIN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmidz/dmidz-hapi-app/issues"
+  },
+  "homepage": "https://github.com/dmidz/dmidz-hapi-app#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "bunyan": "^1.8.12",
+    "bunyan-format": "^0.2.1",
+    "dmidz-utils": "^1.0.0"
+  },
+  "peerDependencies": {
+    "hapi": "^16.6.2"
+  },
+  "devDependencies": {
+    "lab": "^14.3.1"
+  }
+}

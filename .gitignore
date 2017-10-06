@@ -1,3 +1,6 @@
+# PhpStorm/WebStorm project file
+.idea
+
 # Logs
 logs
 *.log
