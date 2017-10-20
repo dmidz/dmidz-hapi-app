@@ -1,6 +1,6 @@
 {
   "name": "dmidz-hapi-app",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Compose an Hapi application with a config, including server settings, global routes and plugins.",
   "main": "index.js",
   "scripts": {
