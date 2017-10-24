@@ -1,6 +1,5 @@
 
-const Path = require('path')
-	, dutils = require('dmidz-utils')
+const dutils = require('dmidz-utils')
 	, Promise = require('bluebird')
 ;
 
@@ -14,19 +13,23 @@ function PluginSample( server, options ) {
 	}, options, true );
 
 	if( me.options.routes ) me.server.route( me.options.routes );
+
+	me.server.expose({
+		obj : {}
+	});
 }
 
 PluginSample.prototype = {
 	initialize : function(){
 		//__ allow to insure async things could be prepared before considering registered by the server
 		return new Promise(function( resolve, reject ){
-			setTimeout( function(){ resolve(); }, 250 );
+			setTimeout( resolve, 250 );
 		});
 	}
 };
 
 exports.register = function( server, options, next ){
-	//_ warn if passing next directly to then, do not return anything from initialize promise
+	//_ warn if passing next directly to then, do not return anything from initialize promise or pass an error actually
 	new PluginSample( server, options ).initialize().then( next );
 };
 

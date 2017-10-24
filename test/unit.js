@@ -31,11 +31,6 @@ lab.experiment('dmidz-app', function(){
 		, plugins : {
 			'plugin-sample' : {
 				custom : 1
-				, register_options : {
-					routes : {
-						prefix : plugin_route_prefix
-					}
-				}
 				, options : {
 					property : 999
 					, routes : [{
@@ -47,6 +42,14 @@ lab.experiment('dmidz-app', function(){
 							}
 						}
 					}]
+				}
+				, register_options : {
+					routes : {
+						prefix : plugin_route_prefix
+					}
+				}
+				, onRegistered : function( server, app ){
+					server.plugins['plugin-sample'].obj.aaa = 333;
 				}
 			}
 		}
@@ -66,6 +69,8 @@ lab.experiment('dmidz-app', function(){
 		const routes = app.server.getAllRoutes();
 		Lab.expect( routes ).to.be.an.array();
 		Lab.expect( routes ).to.have.length( 2 );
+		// console.log('zzz', app.server.plugins );
+		Lab.expect( app.server.plugins['plugin-sample'].obj.aaa ).to.equal( 333 );
 		done();
 	});
 
