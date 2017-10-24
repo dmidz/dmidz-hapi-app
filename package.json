@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "lab test/unit.js -v -I check",
-    "test_noleaks": "lab test/unit.js --leaks -v"
+    "test_noleaks": "lab test/unit.js --leaks -v",
+    "preversion": "npm test"
   },
   "repository": {
     "type": "git",
