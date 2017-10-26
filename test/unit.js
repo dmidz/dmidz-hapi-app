@@ -8,8 +8,8 @@ const Path = require('path')
 	, plugin_route_prefix = '/myprefix'
 	;
 
-lab.experiment('dmidz-app', function(){
-
+lab.experiment('### dmidz-hapi-app', function(){
+	let some_property = null;
 	const app = new App( {
 		settings : {
 			app : {
@@ -19,7 +19,7 @@ lab.experiment('dmidz-app', function(){
 				}
 			}
 		}
-		, routes : [{//_ home
+		, routes : [{
 			method: 'GET'
 			, path: '/'
 			, config : {
@@ -32,16 +32,7 @@ lab.experiment('dmidz-app', function(){
 			'plugin-sample' : {
 				custom : 1
 				, options : {
-					property : 999
-					, routes : [{
-						method: 'GET'
-						, path: '/hello'
-						, config : {
-							handler: function (request, reply) {
-								return reply({ title: 'homepage', content:'Hello !' });
-							}
-						}
-					}]
+					some_property : 999
 				}
 				, register_options : {
 					routes : {
@@ -49,28 +40,24 @@ lab.experiment('dmidz-app', function(){
 					}
 				}
 				, onRegistered : function( server, app ){
-					server.plugins['plugin-sample'].obj.aaa = 333;
+					some_property = server.plugins['plugin-sample'].getSomeProperty();
+					// server.plugins['plugin-sample'].obj.aaa = 333;
 				}
 			}
 		}
 	} );
 
-	lab.before(function( done ){
-
-
-		app.initialize().then( function(){
-			done();
-		});
-
+	lab.test('initialize app', function( ){
+		return app.initialize();
 	});
 
 	//_________ tests
-	lab.test('initialize with no errors, having routes.', function( done ){
+	lab.test('check total of routes ( global & plugins)', function( done ){
 		const routes = app.server.getAllRoutes();
 		Lab.expect( routes ).to.be.an.array();
 		Lab.expect( routes ).to.have.length( 2 );
-		// console.log('zzz', app.server.plugins );
-		Lab.expect( app.server.plugins['plugin-sample'].obj.aaa ).to.equal( 333 );
+		// Lab.expect( app.server.plugins['plugin-sample'].getSomeProperty() ).to.equal( 999 );
+		Lab.expect( some_property ).to.equal( 999 );
 		done();
 	});
 
